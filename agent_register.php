@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_password = password_hash($agent_password, PASSWORD_DEFAULT); // Creates a password hash
 
             if($stmt->execute()) {
-                header("location: agent_login.php");
+                header("location: admin_dashboard.php");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
