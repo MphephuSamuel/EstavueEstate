@@ -177,6 +177,7 @@ input[type="file"] {
             </div>
         </form>
     </div>
+    <script src="assets/js/main.js"></script>
     <script>
         window.onload = function() {
             var urlParams = new URLSearchParams(window.location.search);
@@ -184,8 +185,8 @@ input[type="file"] {
             var password = urlParams.get('password');
             
             if (email && password) {
-                document.getElementById("displayEmail").value = email;
-                document.getElementById("displayPassword").value = password;
+                document.getElementById("email").value = email;
+                document.getElementById("password").value = password;
             }
         };
 </script>
