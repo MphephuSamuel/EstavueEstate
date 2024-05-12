@@ -717,7 +717,7 @@
        var lat = -33.013522;
        var long = 27.892920;
        map.setView([lat, long], 12);
-       var houseMarker = L.marker([lat, long]).addTo(map).bindPopup('Your current location');
+       var houseMarker = L.marker([lat, long]).addTo(map).bindPopup('House with pool');
        overlayMaps['Your Location'] = houseMarker;
        L.control.layers(baseMaps, overlayMaps).addTo(map);
      

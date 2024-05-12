@@ -719,7 +719,7 @@
        var lat = -25.422969;
        var long =30.961805;
        map.setView([lat, long], 12);
-       var houseMarker = L.marker([lat, long]).addTo(map).bindPopup('Your current location');
+       var houseMarker = L.marker([lat, long]).addTo(map).bindPopup('Town House');
        overlayMaps['Your Location'] = houseMarker;
        L.control.layers(baseMaps, overlayMaps).addTo(map);
      
