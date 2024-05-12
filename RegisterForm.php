@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt->bind_param("sssssss", $username, $param_password, $phone, $email, $firstName, $secondName, $lastName);
             if ($stmt->execute()) {
-                header("location: seller_login.php");
+                header("location: index.html");
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -149,7 +149,7 @@ input[type="file"] {
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" pattern="[1-9][0-9]{8}" maxlength="9" required>
+                <input type="tel" id="phone" name="phone" pattern="[0-9][0-9]{9}" maxlength="10" required>
             </div>
             <div class="form-group">
                 <label for="username">Username:</label>
