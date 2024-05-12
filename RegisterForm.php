@@ -46,7 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_password = password_hash($password, PASSWORD_DEFAULT);
             $stmt->bind_param("sssssss", $username, $param_password, $phone, $email, $firstName, $secondName, $lastName);
             if ($stmt->execute()) {
-                header("location: index.html");
+                // Redirect to index.html
+                header("Location: index.html");
+                exit;
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
             }
@@ -56,6 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
@@ -149,10 +152,10 @@ input[type="file"] {
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number:</label>
-                <input type="tel" id="phone" name="phone" pattern="[0-9][0-9]{9}" maxlength="10" required>
+                <input type="tel" id="phone" name="phone" pattern="[1-9][0-9]{8}" maxlength="9" required>
             </div>
             <div class="form-group">
-                <label for="username">Username:</label>
+                <label for="username">Username:</label> 
                 <input type="text" id="username" name="username" required>
                 <span><?php echo $username_err; ?></span>
             </div>
