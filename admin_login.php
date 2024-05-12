@@ -61,6 +61,65 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
     
+    <style>
+        .containerr {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Rbutton{
+  text-align: center;
+}
+
+.containerr h2{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="file"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+  outline: none;
+}
+
+small {
+  color: #777;
+}
+
+
+input[type="file"] {
+  cursor: not-allowed;
+  background-color: #eee;
+}
+
+    </style>
+
 </head>
 <body>
     <div class="container">
@@ -76,7 +135,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                 <input type="password" id="password" name="password" required>
                 <span><?php echo $password_err; ?></span>
             </div>
-            <div class="form-group">
+            <div class="Rbutton">
                 <button type="submit">Login</button>
             </div>
             <div class="form-group">
