@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registration Page</title>
+<link href="assets/css/style.css" rel="stylesheet">
+
+<script lang="Javascript">
+  document.getElementById("phone").addEventListener("input", function() {
+    if (this.value.length > 9) {
+        this.value = this.value.slice(0, 9);
+    }
+});
+</script>
+
+
+<style>
+    .containerr {
+  max-width: 400px;
+  margin: 50px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.Rbutton{
+  text-align: center;
+}
+
+.containerr h2{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: block;
+  font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+input[type="file"] {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus,
+input[type="file"]:focus {
+  outline: none;
+}
+
+small {
+  color: #777;
+}
+
+
+input[type="file"] {
+  cursor: not-allowed;
+  background-color: #eee;
+}
+
+</style>
+
+</head>
+<body>
+
+  <div class="containerr">
+    <h2>Registration Form</h2>
+    <form action="#">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="displayEmail" name="email" ><!--readonly-->
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="displayPassword" name="password" ><!--readonly-->
+      </div>
+        <div class="form-group">
+          <label for="phone">Phone Number: <small>Format: (+27) 123456789</small></label>
+          <div>
+              <input type="tel" id="phone" name="phone" pattern="[1-9][0-9]{8}" maxlength="9" required>
+          </div>  
+      </div>
+      <div class="form-group">
+        <label for="firstName">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" name="firstName" required>
+        </div>
+        <div class="form-group">
+            <label for="secondName">Second Name:</label>
+            <input type="text" id="secondName" name="secondName">
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" name="lastName" required>
+        </div>
+        <div class="form-group">
+          <label for="upload">Upload: <small>(Profile Image)</small></label>
+          <input type="file" id="upload" name="upload" accept="image/*" required>
+      </div>
+      
+        <div class="Rbutton">
+        <button type="submit">Register</button>
+        </div>
+    </form>
+</div>
+
+
+<script>
+  window.onload = function() {
+      var urlParams = new URLSearchParams(window.location.search);
+      var email = urlParams.get('email');
+      var password = urlParams.get('password');
+      
+      if (email && password) {
+          document.getElementById("displayEmail").value = email;
+          document.getElementById("displayPassword").value = password;
+      }
+  };
+</script>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
