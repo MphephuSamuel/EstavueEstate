@@ -10,7 +10,7 @@ session_destroy();
 // Determine the type of user and redirect accordingly
 if ($_GET['user_type'] === 'agent') {
     // Redirect agents to the agent login page
-    header("location: agent_login.html");
+    header("location: index.html");
 } elseif ($_GET['user_type'] === 'seller') {
     // Redirect sellers to the seller login page
     header("location: index.html");
