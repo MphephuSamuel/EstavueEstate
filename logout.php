@@ -16,7 +16,7 @@ if ($_GET['user_type'] === 'agent') {
     header("location: index.html");
 } else {
     // Redirect to a default login page if no user type is specified
-    header("location: login.php");
+    header("location: index.html");
 }
 
 exit;
