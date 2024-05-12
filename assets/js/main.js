@@ -93,13 +93,6 @@ document.getElementById("registerForm").addEventListener("submit", function(even
   }
 });
 
-/**
-* Template Name: EstateAgency
-* Template URL: https://bootstrapmade.com/real-estate-agency-bootstrap-template/
-* Updated: Mar 17 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 
 (function() {
   "use strict";
