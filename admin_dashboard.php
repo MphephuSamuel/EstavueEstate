@@ -31,7 +31,7 @@ while ($row = $result->fetch_assoc()) {
     $notificationCounts[] = $row['notification_count'];
 }
 
-    
+
 ?>
 
 <!DOCTYPE html>
@@ -158,8 +158,6 @@ while ($row = $result->fetch_assoc()) {
     </script>
 
     <!-- Logout Button -->
-    <form action="logout.php?user_type=admin" method="post">
-        <button type="submit">Logout</button>
     </form>
 
         <a href="logout.php?user_type=admin">Logout</a>
