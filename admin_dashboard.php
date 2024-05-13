@@ -143,7 +143,7 @@ while ($row = $result->fetch_assoc()) {
         <label>User Role</label>
         <select name="role" required>
             <option value="seller">Seller</option>
-            <option value="admin">Admin</option>
+            <option value="agent">Admin</option>
         </select>
     </div>
     <button type="submit">Add User</button>
