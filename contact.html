@@ -24,6 +24,70 @@
  
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f5f5f5;
+    }
+    .surveycontainer {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+    input[type="text"],
+    textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    input[type="radio"] {
+        margin-right: 5px;
+    }
+    .rating {
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .rating input {
+        display: none;
+    }
+    .rating label {
+        color: #ddd;
+        float: right;
+    }
+    .rating label:before {
+        content: "\2605";
+        font-size: 20px;
+        padding: 5px;
+        cursor: pointer;
+    }
+    .rating input:checked ~ label {
+        color: #ffca08;
+    }
+    .submit-btn {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+</style>
   
 </head>
 
@@ -275,6 +339,31 @@
               </div>
             </div>
           </div>
+          <div class="surveycontainer">
+            <h1>Customer Satisfaction Survey</h1>
+            <form action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label>Overall, how satisfied are you with our service?</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                </div>
+                <label for="feedback">Additional feedback (optional):</label>
+                <textarea id="feedback" name="feedback" rows="4"></textarea>
+                <input type="submit" class="submit-btn" value="Submit">
+            </form>
+        </div>
           <div class="col-sm-12 section-t8">
             <div class="row">
               <div class="col-md-7">
