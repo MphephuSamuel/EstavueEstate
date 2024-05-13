@@ -19,7 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if(empty($username_err) && empty($password_err)) {
-        $sql = "SELECT user_id, username, password FROM admins WHERE username = ?";
+        $sql = "SELECT admin_id, username, password FROM admins WHERE username = ?";
         if($stmt = $conn->prepare($sql)) {
             $stmt->bind_param("s", $param_username);
             $param_username = $username;
@@ -27,12 +27,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
             if($stmt->execute()) {
                 $stmt->store_result();
                 if($stmt->num_rows == 1) {
-                    $stmt->bind_result($id, $username, $hashed_password);
+                    $stmt->bind_result($admin_id, $username, $hashed_password);
                     if($stmt->fetch()) {
                         if(password_verify($password, $hashed_password)) {
                             session_start();
                             $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
+                            $_SESSION["admin_id"] = $admin_id;
                             $_SESSION["username"] = $username;
                             $_SESSION["role"] = 'admin';
 
