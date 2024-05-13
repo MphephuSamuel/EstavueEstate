@@ -31,7 +31,21 @@ while ($row = $result->fetch_assoc()) {
     $notificationCounts[] = $row['notification_count'];
 }
 
+// Retrieve survey responses from the database
+$sql = "SELECT rating, COUNT(*) AS count FROM survey_responses GROUP BY rating";
+$result = $conn->query($sql);
+$ratings = [];
+while ($row = $result->fetch_assoc()) {
+    $ratings[$row['rating']] = $row['count'];
+}
 
+/* Debugging: Print retrieved ratings
+echo "<pre>";
+print_r($ratings);
+echo "</pre>";*/
+
+// Close the database connection
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -148,12 +162,59 @@ while ($row = $result->fetch_assoc()) {
     </div>
     <button type="submit">Add User</button>
 </form>
-        <h2>Notification analytics chart to see if the sellers really need that part</h2>
+        
+
+<h2>Notification analytics chart to see if the sellers really need that part</h2>
         <!-- Display Notification Analytics Chart -->
     <div style="width: 800px; height: 400px;">
         <canvas id="notificationChart"></canvas>
     </div>
+    
+    <div>
+        <h2>User Satisfaction Ratings</h2>
+        <canvas id="ratingChart" width="200" height="200"></canvas>
+    </div>
 
+    <script>
+        var ratings = <?php echo json_encode($ratings); ?>;
+        var labels = [];
+        var data = [];
+
+        for (var rating in ratings) {
+            labels.push(rating + ' Stars');
+            data.push(ratings[rating]);
+        }
+
+        // Debugging: Print labels and data
+        console.log(labels);
+        console.log(data);
+
+        var ctx = document.getElementById('ratingChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.7)', // Red
+                        'rgba(54, 162, 235, 0.7)', // Blue
+                        'rgba(255, 206, 86, 0.7)', // Yellow
+                        'rgba(75, 192, 192, 0.7)', // Green
+                        'rgba(153, 102, 255, 0.7)' // Purple
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'User Satisfaction Ratings'
+                }
+            }
+        });
+    </script>
+    </script>
     <!-- JavaScript to render the chart -->
     <script>
         var ctx = document.getElementById('notificationChart').getContext('2d');
