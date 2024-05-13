@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       wrapper.classList.add('active-popup');
       wrapper.style.zIndex = '9999'; // Ensure wrapper is above other content
       registerForm.style.zIndex = '10000'; // Ensure form is above other content
-      wrapper.style.height = '480px';
+      wrapper.style.height = '490px';
   }
 
   // Function to close forms
