@@ -124,6 +124,30 @@ while ($row = $result->fetch_assoc()) {
             </tbody>
         </table>
         <br>
+
+        <h2>Add New User</h2>
+<form action="add_user.php" method="post">
+    <div>
+        <label>Username</label>
+        <input type="text" name="username" required>
+    </div>
+    <div>
+        <label>Email</label>
+        <input type="email" name="email" required>
+    </div>
+    <div>
+        <label>Password</label>
+        <input type="password" name="password" required>
+    </div>
+    <div>
+        <label>User Role</label>
+        <select name="role" required>
+            <option value="seller">Seller</option>
+            <option value="admin">Admin</option>
+        </select>
+    </div>
+    <button type="submit">Add User</button>
+</form>
         <h2>Notification analytics chart to see if the sellers really need that part</h2>
         <!-- Display Notification Analytics Chart -->
     <div style="width: 800px; height: 400px;">
