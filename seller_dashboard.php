@@ -4,7 +4,7 @@ include 'db.php';
 
 // Redirect if not logged in or not the right user role
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'seller') {
-    header("location: seller_login.php");
+    header("location: index.html");
     exit;
 }
 
