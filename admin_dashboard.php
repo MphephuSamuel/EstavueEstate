@@ -30,39 +30,8 @@ while ($row = $result->fetch_assoc()) {
     $notificationDates[] = $row['notification_date'];
     $notificationCounts[] = $row['notification_count'];
 }
-// Fetch agents
-$sql = "SELECT user_id, username FROM users WHERE role = 'agent'";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-$agents = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-// Calculate average response time for each agent
-$response_times = array();
-foreach ($agents as $agent) {
-    $agent_id = $agent['user_id'];
 
-    // Query to calculate average response time for the agent
-    $sql = "SELECT AVG(TIMESTAMPDIFF(MINUTE, n.created_at, r.created_at)) AS avg_response_time
-            FROM notifications n
-            INNER JOIN replies r ON n.notification_id = r.notification_id
-            WHERE r.sender_id = ?";
-
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $agent_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
-    $avg_response_time = $row['avg_response_time'];
-
-    // Save agent's average response time
-    $response_times[$agent_id] = $avg_response_time;
-}
-
-// Output average response times
-foreach ($response_times as $agent_id => $avg_time) {
-    $username = $agents[$agent_id]['username'];
-    echo "Agent: $username, Average Response Time: $avg_time minutes <br>";
-}
 ?>
 
 <!DOCTYPE html>
