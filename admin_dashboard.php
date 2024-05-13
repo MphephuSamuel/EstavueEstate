@@ -12,6 +12,26 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
 $sql = "SELECT * FROM users WHERE role = 'seller'";
 $result = $conn->query($sql);
 $users = $result->fetch_all(MYSQLI_ASSOC);
+
+// Fetch notification data for analytics
+$sql = "SELECT DATE(timestamp) AS notification_date, COUNT(*) AS notification_count
+        FROM notifications
+        GROUP BY DATE(timestamp)
+        ORDER BY notification_date";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Process data for visualization
+$notificationDates = [];
+$notificationCounts = [];
+while ($row = $result->fetch_assoc()) {
+    $notificationDates[] = $row['notification_date'];
+    $notificationCounts[] = $row['notification_count'];
+}
+
+    
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +123,44 @@ $users = $result->fetch_all(MYSQLI_ASSOC);
                 <?php endforeach; ?>
             </tbody>
         </table>
-        
+        <br>
+        <h2>Notification analytics chart to see if the sellers really need that part</h2>
+        <!-- Display Notification Analytics Chart -->
+    <div style="width: 800px; height: 400px;">
+        <canvas id="notificationChart"></canvas>
+    </div>
+
+    <!-- JavaScript to render the chart -->
+    <script>
+        var ctx = document.getElementById('notificationChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: <?php echo json_encode($notificationDates); ?>,
+                datasets: [{
+                    label: 'Number of Notifications',
+                    data: <?php echo json_encode($notificationCounts); ?>,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+
+    <!-- Logout Button -->
+    <form action="logout.php?user_type=admin" method="post">
+        <button type="submit">Logout</button>
+    </form>
 
         <a href="logout.php?user_type=admin">Logout</a>
     </div>
