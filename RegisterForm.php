@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sssssss", $username, $param_password, $phone, $email, $firstName, $secondName, $lastName);
             if ($stmt->execute()) {
                 // Redirect to index.html
-                header("Location: index.html");
+                header("location: registration_success.php");
                 exit;
             } else {
                 echo "Oops! Something went wrong. Please try again later.";
