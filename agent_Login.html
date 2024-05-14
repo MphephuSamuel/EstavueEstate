@@ -69,7 +69,7 @@ input[type="file"] {
 <body>
       <div class="containerr">
         <h2>Agent Login</h2>
-        <form action="agent_login.php" method="post">
+        <form id="agentLogin" action="agent_login.php" method="post">
           <div class="form-group">
             <label for="password">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -84,5 +84,27 @@ input[type="file"] {
             </div>
         </form>
     </div>
+    <script>
+      document.getElementById('agentLogin').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        var formData = new FormData(this);
+        fetch('agent_login.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = data.redirectUrl;
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+      });
+    </script>
 </body>
 </html>

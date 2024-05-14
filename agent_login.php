@@ -30,22 +30,21 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->bind_result($id, $username, $hashed_password, $role);
                     if($stmt->fetch()) {
                         if(password_verify($password, $hashed_password)) {
-                            session_start();
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
                             $_SESSION["username"] = $username;
                             $_SESSION["role"] = $role;
 
-                            header("location: agent_dashboard.php");
+                            echo json_encode(array("success" => true, "redirectUrl" => "agent_dashboard.php"));
                         } else {
-                            $login_err = "Invalid password.";
+                            echo json_encode(array("success" => false, "message" => "Invalid password."));
                         }
                     }
                 } else {
-                    $login_err = "Invalid username.";
+                    echo json_encode(array("success" => false, "message" => "Invalid username."));
                 }
             } else {
-                echo "Oops! Something went wrong. Please try again later.";
+                echo json_encode(array("success" => false, "message" => "Oops! Something went wrong. Please try again later."));
             }
             $stmt->close();
         }
