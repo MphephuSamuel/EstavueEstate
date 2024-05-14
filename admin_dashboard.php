@@ -9,7 +9,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION
 }
 
 // Fetch seller accounts from the database
-$sql = "SELECT * FROM users WHERE role = 'seller'";
+$sql = "SELECT * FROM users WHERE role IN ('seller', 'agent')";
 $result = $conn->query($sql);
 $users = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -127,7 +127,8 @@ $conn->close();
                     <tr>
                         <td><?php echo htmlspecialchars($user['user_id']); ?></td>
                         <td><?php echo htmlspecialchars($user['username']); ?></td>
-                        <td><?php echo htmlspecialchars($user['email']); ?></td>
+                        <td><?php echo htmlspecialchars($user['role']); ?></td>
+                        <td><?php echo htmlspecialchars($user['created_at']); ?></td>
                         <td>
                             <!-- Add edit and delete buttons with appropriate links -->
                             <a href="edit_user.php?id=<?php echo $user['user_id']; ?>">Edit</a>
@@ -157,7 +158,7 @@ $conn->close();
         <label>User Role</label>
         <select name="role" required>
             <option value="seller">Seller</option>
-            <option value="agent">Admin</option>
+            <option value="agent">Agent</option>
         </select>
     </div>
     <button type="submit">Add User</button>
