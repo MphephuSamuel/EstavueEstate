@@ -21,7 +21,12 @@
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
- 
+  <!--MAPP-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin="">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+  
   <link href="assets/css/style.css" rel="stylesheet">
 
   <style>
@@ -335,9 +340,7 @@
         <div class="row">
           <div class="col-sm-12">
             <div class="contact-map box">
-              <div id="map" class="contact-map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1ses-419!2sve!4v1510329142834" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
-              </div>
+              <div id="leaflet-map" class="contact-map"></div>
             </div>
           </div>
           <div class="surveycontainer">
@@ -637,7 +640,48 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+  // Initialize Leaflet map
+  var map = L.map('leaflet-map').setView([40.75889497932681, -73.98731968482413], 15); // Set the initial coordinates and zoom level
+
+  // Add the base map layer (you can use different tile providers)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+
+ 
+    // Adjust map size for responsiveness
+  function adjustMapSize() {
+    var mapDiv = document.getElementById('leaflet-map');
+    var width = mapDiv.offsetWidth;
+    mapDiv.style.height = (width * 0.4) + 'px'; // Adjust height relative to width
+    map.invalidateSize(); // Invalidate size to update map
+  }
+
+  // Call adjustMapSize function on page load and resize
+  window.onload = adjustMapSize;
+  window.onresize = adjustMapSize;
+
+   // Add a marker to the map
+    L.marker([-22.897780761417437, 30.036261824527067]).addTo(map)
+    .bindPopup('Louis Tritchardt office in Limpopo')
+    .openPopup();
+    L.marker([-25.43681245957908, 30.981861426461972]).addTo(map)
+    .bindPopup('University of mpumalanga')
+    .openPopup();
+</script>
+
+<style>
+  /* Adjust map size for smaller screens */
+  @media (max-width: 767px) {
+    #leaflet-map {
+      height: 300px; /* Adjusted height for smaller screens */
+    }
+  }
+</style>
+
   <script src="assets/js/main.js"></script>
   <script src="login.js"></script>
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
